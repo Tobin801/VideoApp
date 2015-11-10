@@ -30,8 +30,32 @@ public class SoundActivity extends Activity implements Runnable
         stopButton = (Button) findViewById(R.id.stopButton);
         soundSeekBar = (SeekBar) findViewById(R.id.soundSeekBar);
         videoButton = (Button) findViewById(R.id.videoButton);
-        soundPlayer = MediaPlayer.create(this.getBaseContext(),R.raw.Insert thing here);
+        soundPlayer = MediaPlayer.create(this.getBaseContext(),R.raw.melancholy_hill);
+
+        setupListeners();
+
+        soundThread = new Thread(this);
+        soundThread.start();
     }
 
+    private void setupListeners()
+    {
+        startButton.setOnClickListener(new View.OnClickListener()
+        {
+           @Override
+            public void onClick(View v)
+           {
+               soundPlayer.start();
+           }
+        });
+    }
 
+    pauseButton.setOnClickListener(new View.OnClickListener()
+    {
+       @Override
+       public void onClick(View v)
+        {
+            soundPlayer.pause();
+        }
+    });
 }
