@@ -92,7 +92,7 @@ public class SoundActivity extends Activity implements Runnable
             {}
 
             @Override
-            public void onProgressChanged(SeekBar, int progress, boolean fromUser)
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
                 if (fromUser)
                 {
