@@ -42,20 +42,93 @@ public class SoundActivity extends Activity implements Runnable
     {
         startButton.setOnClickListener(new View.OnClickListener()
         {
-           @Override
+            @Override
             public void onClick(View v)
-           {
-               soundPlayer.start();
-           }
+            {
+                soundPlayer.start();
+            }
+        });
+
+
+        pauseButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                soundPlayer.pause();
+            }
+        });
+
+        stopButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View currentView)
+            {
+                soundPlayer.stop();
+                soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.derp_news_debate);
+            }
+        });
+
+        videoButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View currentView)
+            {
+                Intent myIntent = new Intent(currentView.getContext(), VideoActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+
+
+        });
+
+        soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {}
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {}
+
+            @Override
+            public void onProgressChanged(SeekBar, int progress, boolean fromUser)
+            {
+                if (fromUser)
+                {
+                    soundPlayer.seekTo(progress);
+                }
+            }
         });
     }
 
-    pauseButton.setOnClickListener(new View.OnClickListener()
+    /**
+     * Required since we are implementing Runnable
+     * Allows the seekbar to update.
+     */
+    @Override
+    public void run()
     {
-       @Override
-       public void onClick(View v)
+        int currentPosition = 0;
+        int soundTotal = soundPlayer.getDuration();
+        soundSeekBar.setMax(soundTotal);
+
+        while (soundPlayer != null && currentPosition < soundTotal)
         {
-            soundPlayer.pause();
+            try
+            {
+                Thread.sleep(300);
+                currentPosition = soundPlayer.getCurrentPosition();
+            }
+            catch(InterruptedException soundException)
+            {
+                return;
+            }
+            catch(Exception otherException)
+            {
+                return;
+            }
+            soundSeekBar.setProgress(currentPosition);
         }
-    });
+    }
 }
