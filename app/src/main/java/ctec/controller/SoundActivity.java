@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.*;
 import android.view.View;
-import android.app.Activity;
 import android.media.MediaPlayer;
 import android.content.Intent;
 
