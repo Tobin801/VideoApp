@@ -64,7 +64,7 @@ public class SoundActivity extends Activity implements Runnable
             public void onClick(View currentView)
             {
                 soundPlayer.stop();
-                soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.derp_news_debate);
+                soundPlayer = MediaPlayer.create(getBaseContext(), R.raw.melancholy_hill);
             }
         });
 
